@@ -10,6 +10,11 @@ fn main() {
     let args: Vec<String> = env::args().collect();
     let mut opts = Options::new();
     opts.optflag("h", "help", "print this message");
+    opts.optflag(
+        "d",
+        "decrypt",
+        "switch to decryption mode (default is encryption)",
+    );
     let matches = opts.parse(&args[1..]).unwrap();
     if matches.opt_present("h") {
         print_help(&args[0], opts);
@@ -17,13 +22,6 @@ fn main() {
     if matches.free.is_empty() {
         panic!("No password specified");
     }
-    let password = &matches.free[0];
-    let mut salt = [0u8; 16];
-    OsRng.fill_bytes(&mut salt);
-    let key = key_from_password(password, &salt);
-    let mut nonce = [0u32; 3];
-    OsRng.fill_bytes(unsafe { mem::transmute::<&mut [u32; 3], &mut [u8; 32]>(&mut nonce) });
-    let mut chacha20 = ChaCha20::new(&key, &nonce);
     let mut input: Box<dyn Read> = if matches.free.len() > 1 {
         Box::new(BufReader::new(File::open(&matches.free[1]).unwrap()))
     } else {
@@ -34,6 +32,20 @@ fn main() {
     } else {
         Box::new(BufWriter::new(std::io::stdout()))
     };
+    let password = &matches.free[0];
+    let mut salt = [0u8; 16];
+    let mut nonce = [0u8; 12];
+    if matches.opt_present("d") {
+        input.read(&mut salt).unwrap();
+        input.read(&mut nonce).unwrap();
+    } else {
+        OsRng.fill_bytes(&mut salt);
+        OsRng.fill_bytes(&mut nonce);
+        output.write(&mut salt).unwrap();
+        output.write(&mut nonce).unwrap();
+    }
+    let key = key_from_password(password, &salt);
+    let mut chacha20 = ChaCha20::new(&key, &nonce);
     internal_loop(&mut chacha20, &mut input, &mut output).unwrap();
 }
 

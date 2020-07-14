@@ -5,7 +5,8 @@ pub struct ChaCha20 {
 
 impl ChaCha20 {
     #[rustfmt::skip]
-    pub fn new(key: &[u32; 8], nonce: &[u32; 3]) -> ChaCha20 {
+    pub fn new(key: &[u32; 8], nonce: &[u8; 12]) -> ChaCha20 {
+        let nonce = unsafe { &*(&nonce as *const &[u8; 12] as *const [u32; 3]) };
         ChaCha20 {
             state: [
                 0x61707865, 0x3320646e, 0x79622d32, 0x6b206574,
@@ -38,7 +39,7 @@ mod test {
 
     #[test]
     fn test_chacha20_enc() {
-        let mut chacha20 = ChaCha20::new(&[0u32; 8], &[0u32; 3]);
+        let mut chacha20 = ChaCha20::new(&[0u32; 8], &[0u8; 12]);
         let input = [12u32; 16];
         let mut output = [0u32; 16];
         chacha20.next(&input, &mut output);
