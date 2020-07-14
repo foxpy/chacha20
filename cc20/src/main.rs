@@ -4,7 +4,7 @@ use getopts::Options;
 use rand_core::{OsRng, RngCore};
 use std::fs::File;
 use std::io::{BufReader, BufWriter, Read, Write};
-use std::{env, mem, process};
+use std::{env, process};
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -58,13 +58,13 @@ fn print_help(program_name: &str, opts: Options) -> ! {
     process::exit(0);
 }
 
-fn key_from_password(pwd: &str, salt: &[u8; 16]) -> [u32; 8] {
-    let mut key = [0u32; 8];
+fn key_from_password(pwd: &str, salt: &[u8; 16]) -> [u8; 32] {
+    let mut key = [0u8; 32];
     pbkdf2(
         &mut Hmac::new(Sha256::new(), salt),
         pwd.as_bytes(),
         2000,
-        unsafe { mem::transmute::<&mut [u32; 8], &mut [u8; 32]>(&mut key) },
+        &mut key,
     );
     key
 }
