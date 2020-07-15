@@ -6,5 +6,4 @@ using it **for anything**.
 
 ## What's in this repo?
 
-- [practice implementation in C](c/)
-- [pure Rust implementation with CLI utility](src/)
+- [practice implementation in C](practice/)
