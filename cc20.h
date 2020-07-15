@@ -5,9 +5,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-// main.c
-int main_loop(FILE *input, FILE *output);
-
 // args.c
 struct config {
     bool decrypt;
@@ -29,6 +26,9 @@ struct chacha20_state {
 void chacha20_init(struct chacha20_state *state, uint8_t key[static 32],
                    uint8_t nonce[static 12]);
 void chacha20_next(struct chacha20_state *state, uint8_t buf[static 64]);
+
+// main.c
+int main_loop(FILE *input, FILE *output, struct chacha20_state *state);
 
 // util.c
 __attribute__((noreturn)) void die(char const *msg);
