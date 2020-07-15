@@ -3,7 +3,7 @@
 int main(int argc, char *argv[static argc]) {
     struct config cfg;
     if (parse_args(argc, argv, &cfg) != 0) {
-        fprintf(stderr, "%s", cfg.err);
+        fprintf(stderr, "%s\n", cfg.err);
     }
     if (cfg.help) {
         print_help(&cfg, EXIT_SUCCESS);
