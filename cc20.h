@@ -21,5 +21,14 @@ struct config {
 int parse_args(int argc, char *argv[static argc], struct config *cfg);
 __attribute__((noreturn)) void print_help(struct config const *cfg, int status);
 
+// chacha20.c
+struct chacha20_state {
+    uint32_t state[16];
+    uint32_t copy[16];
+};
+void chacha20_init(struct chacha20_state *state, uint8_t key[static 32],
+                   uint8_t nonce[static 12]);
+void chacha20_next(struct chacha20_state *state, uint8_t buf[static 64]);
+
 // util.c
 __attribute__((noreturn)) void die(char const *msg);
