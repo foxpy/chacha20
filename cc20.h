@@ -1,9 +1,12 @@
 #pragma once
 #include <stdbool.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdint.h>
 #include <string.h>
+
+// main.c
+int main_loop(FILE *input, FILE *output);
 
 // args.c
 struct config {
