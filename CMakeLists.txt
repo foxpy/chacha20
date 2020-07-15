@@ -9,4 +9,8 @@ add_executable(practice practice/chacha20.c)
 set_property(TARGET practice PROPERTY C_STANDARD 11)
 target_compile_options(practice PUBLIC -Wall -Wextra -Wpedantic)
 
-add_executable(cc20 cc20.c args.c util.c)
+add_executable(cc20 cc20.c args.c util.c chacha20.c)
+add_executable(chacha20-test test.c chacha20.c util.c)
+
+enable_testing()
+add_test(NAME ChaCha20Runs COMMAND chacha20-test)
