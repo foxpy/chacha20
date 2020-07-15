@@ -8,3 +8,5 @@ endif()
 add_executable(practice practice/chacha20.c)
 set_property(TARGET practice PROPERTY C_STANDARD 11)
 target_compile_options(practice PUBLIC -Wall -Wextra -Wpedantic)
+
+add_executable(cc20 cc20.c args.c util.c)
