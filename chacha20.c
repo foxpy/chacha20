@@ -35,7 +35,7 @@ void chacha20_next(struct chacha20_state *state, uint8_t buf[static 64]) {
     ++(state->state[12]);
     memcpy(state->copy, state->state, sizeof(uint32_t) * 16);
     uint32_t *s = state->copy;
-    uint32_t *output = (uint32_t)buf;
+    uint32_t *output = (uint32_t *)buf;
     for (size_t i = 0; i < 10; ++i) {
         QROUND(s[0], s[4], s[8], s[12]);
         QROUND(s[1], s[5], s[9], s[13]);
