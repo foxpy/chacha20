@@ -6,7 +6,12 @@ int main(int argc, char *argv[static argc]) {
     uint8_t nonce[12] = {'c', 'h', 'a', 'c', 'h',
                          'a', '2', '0', 20}; // TODO: remove hardcoded nonce
     if (parse_args(argc, argv, &cfg) != 0) {
-        fprintf(stderr, "%s\n", cfg.err);
+        if (cfg.help) {
+            print_help(&cfg, EXIT_FAILURE);
+        } else {
+            fprintf(stderr, "%s\n", cfg.err);
+        }
+        return EXIT_FAILURE;
     }
     if (cfg.help) {
         print_help(&cfg, EXIT_SUCCESS);
