@@ -1,13 +1,15 @@
 cmake_minimum_required(VERSION 3.1)
 project(ChaCha20)
 
-add_executable(cc20 cc20.c args.c util.c chacha20.c)
-set_property(TARGET cc20 PROPERTY C_STANDARD 11)
-target_compile_options(cc20 PUBLIC -Wall -Wextra -Wpedantic)
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD_REQUIRED True)
+add_compile_options(-Wall -Wextra -Wpedantic)
+add_subdirectory(qc)
 
+add_executable(cc20 cc20.c args.c util.c chacha20.c)
+target_link_libraries(cc20 PUBLIC qc)
 add_executable(chacha20-test test.c chacha20.c util.c)
-set_property(TARGET chacha20-test PROPERTY C_STANDARD 11)
-target_compile_options(chacha20-test PUBLIC -Wall -Wextra -Wpedantic)
+target_link_libraries(chacha20-test PUBLIC qc)
 
 enable_testing()
 add_test(NAME ChaCha20Runs COMMAND chacha20-test)

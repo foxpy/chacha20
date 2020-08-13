@@ -3,8 +3,9 @@
 int main(int argc, char *argv[static argc]) {
     struct config cfg;
     struct chacha20_state cc20;
-    srand(clock() ^ time(NULL));
     uint8_t nonce[12];
+    qc_rnd rnd;
+    qc_rnd_init(&rnd);
     if (parse_args(argc, argv, &cfg) != 0) {
         if (cfg.help) {
             print_help(&cfg, EXIT_FAILURE);
@@ -22,7 +23,7 @@ int main(int argc, char *argv[static argc]) {
         }
     } else {
         for (size_t i = 0; i < 12; ++i) {
-            nonce[i] = rand();
+            nonce[i] = qc_rnd8(&rnd);
         }
         if (fwrite(nonce, sizeof(uint8_t), 12, cfg.output) != 12) {
             die("Failed to write nonce");
