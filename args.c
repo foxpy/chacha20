@@ -6,7 +6,9 @@ static int parse_key(char const *str, struct config *cfg) {
         return -1;
     }
     for (size_t i = 0; i < 32; ++i) {
-        sscanf(&str[2 * i], "%02hhx", &cfg->key[i]);
+        unsigned u;
+        sscanf(&str[2 * i], "%02x", &u);
+        cfg->key[i] = (uint8_t)(u % UINT8_MAX);
     }
     return 0;
 }
@@ -65,7 +67,6 @@ int parse_args(int argc, char *argv[static argc], struct config *cfg) {
                 if (open_output_file(argv[i], cfg) != 0) {
                     return -1;
                 }
-                break;
                 break;
             default:
                 cfg->err = "Too much positional arguments!";
