@@ -6,9 +6,9 @@ set(CMAKE_C_STANDARD_REQUIRED True)
 add_compile_options(-Wall -Wextra -Wpedantic)
 add_subdirectory(qc)
 
-add_executable(cc20 cc20.c args.c util.c chacha20.c)
+add_executable(cc20 cc20.c args.c chacha20.c)
 target_link_libraries(cc20 PUBLIC qc)
-add_executable(chacha20-test test.c chacha20.c util.c)
+add_executable(chacha20-test test.c chacha20.c)
 target_link_libraries(chacha20-test PUBLIC qc)
 
 enable_testing()
