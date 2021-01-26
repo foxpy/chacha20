@@ -6,3 +6,6 @@ build/
 # Rust
 target
 Cargo.lock
+
+# JetBrains
+.idea/
