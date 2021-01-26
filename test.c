@@ -28,6 +28,6 @@ int main() {
                    0x4e3c50a2,
                },
                sizeof(uint32_t) * 16) != 0) {
-        die("ChaCha20 test failed");
+        qc_die("ChaCha20 test failed");
     };
 }
