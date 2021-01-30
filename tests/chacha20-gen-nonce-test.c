@@ -9,5 +9,5 @@ int main(void) {
     qc_result result = chacha20_gen_nonce(nonce, err);
     qc_assert(result == QC_SUCCESS, "Failed to generate ChaCha20 nonce: \"%s\"", qc_err_get(err));
     qc_err_free(err);
-    qc_assert(memcmp(nonce, (uint8_t[12]){0}, 32) != 0, "chacha20_gen_nonce() did not actually write a nonce");
+    qc_assert(memcmp(nonce, (uint8_t[12]){0}, 12) != 0, "chacha20_gen_nonce() did not actually write a nonce");
 }
