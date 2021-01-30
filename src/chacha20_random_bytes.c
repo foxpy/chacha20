@@ -12,7 +12,7 @@ qc_result chacha20_random_bytes(size_t len, uint8_t dst[static len], qc_err* err
             return QC_FAILURE;
         } else {
             uint64_t buf = qc_rnd64(&rnd);
-            memmove(&dst[i], &buf, qc_min(sizeof(uint64_t), len - sizeof(uint64_t) * i));
+            memmove(&dst[i], &buf, qc_min(sizeof(uint64_t), len - i));
         }
     }
     return QC_SUCCESS;
