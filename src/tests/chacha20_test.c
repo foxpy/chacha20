@@ -4,15 +4,6 @@
 #include "chacha20.h"
 #include "../chacha20_impl.h"
 
-static void check_gen(void) {
-    qc_err* err = qc_err_new();
-    uint8_t key[32];
-    uint8_t nonce[12];
-    qc_assert(chacha20_gen_key(key, err) == QC_SUCCESS, "Failed to generate key: %s", qc_err_get(err));
-    qc_assert(chacha20_gen_nonce(nonce, err) == QC_SUCCESS, "Failed to generate nonce: %s", qc_err_get(err));
-    qc_err_free(err);
-}
-
 void check_cipher(void) {
     uint8_t key[32] = {
         0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
@@ -37,6 +28,5 @@ void check_cipher(void) {
 }
 
 int main(void) {
-    check_gen();
     check_cipher();
 }
