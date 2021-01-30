@@ -13,6 +13,6 @@ add_library(ChaCha20
 target_link_libraries(ChaCha20 PUBLIC qc)
 target_include_directories(ChaCha20 PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>)
 
-add_executable(chacha20-test chacha20_test.c)
-target_link_libraries(chacha20-test PUBLIC ChaCha20)
-add_test(NAME chacha20-test COMMAND chacha20-test)
+if(CC20_TESTS)
+    add_subdirectory(tests)
+endif()

@@ -2,7 +2,7 @@
 #include <string.h>
 #include <qc.h>
 #include "chacha20.h"
-#include "chacha20_impl.h"
+#include "../chacha20_impl.h"
 
 static void check_gen(void) {
     qc_err* err = qc_err_new();
