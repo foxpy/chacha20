@@ -1,7 +1,6 @@
 add_library(ChaCha20
     chacha20_new.c
     chacha20_free.c
-    chacha20_random_bytes.c
     chacha20_gen_key.c
     chacha20_gen_nonce.c
     chacha20_quarter_round.c
