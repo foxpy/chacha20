@@ -1,7 +1,6 @@
 #include <qc.h>
 #include <stdint.h>
 #include "chacha20.h"
-#include "chacha20_impl.h"
 
 qc_result chacha20_gen_nonce(uint8_t dst[static 12], qc_err* err) {
     if (qc_rnd_os_buf(12, dst, err) == QC_FAILURE) {
