@@ -92,6 +92,7 @@ static qc_result main_loop(chacha20_state* cc20, FILE* dst, FILE* src, qc_err* e
 }
 
 int main(int argc, char* argv[]) {
+    qc_reopen_stdin_stdout_binary();
     qc_err* err = qc_err_new();
     cfg config;
     if (parse_arguments(&config, argc, argv, err) != QC_SUCCESS) {
