@@ -21,5 +21,7 @@ void chacha20_next(chacha20_state* state) {
         s[i] += state->mat[i];
     }
     state->used = 0;
-    memmove(state->buf, s, sizeof(state->buf));
+    for (size_t i = 0; i < 16; ++i) {
+        qc_u32_to_le(&state->buf[4*i], s[i]);
+    }
 }
