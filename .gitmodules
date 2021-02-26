@@ -1,3 +1,6 @@
 [submodule "qc"]
 	path = qc
 	url = https://github.com/foxpy/qc
+[submodule "libzahl"]
+	path = libzahl
+	url = https://git.suckless.org/libzahl/
