@@ -6,7 +6,6 @@ set(CMAKE_C_STANDARD_REQUIRED True)
 add_compile_options(-Wall -Wextra -Wpedantic)
 
 add_subdirectory(qc)
-add_subdirectory(libzahl)
 
 option(CC20_TESTS OFF "Build tests")
 if (CC20_TESTS)
