@@ -1,3 +1,6 @@
 [submodule "dependencies/qc"]
 	path = dependencies/qc
 	url = https://github.com/foxpy/qc
+[submodule "dependencies/libzahl"]
+	path = dependencies/libzahl
+	url = https://git.suckless.org/libzahl/
