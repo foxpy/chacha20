@@ -44,7 +44,7 @@ static void poly1305_impl_uint288_t_mul_scalar(uint288_t* a, uint32_t s) {
 
 static void poly1305_impl_uint288_t_mul_shift_right(uint288_t* a, size_t n) {
     assert(n < 9);
-    for (size_t i = n; i < 9; ++i) {
+    for (ptrdiff_t i = 9; i >= (ptrdiff_t) n; --i) {
         a->u[i] = a->u[i-n];
     }
     for (size_t i = 0; i < n; ++i) {
