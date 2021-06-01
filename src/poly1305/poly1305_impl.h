@@ -2,6 +2,9 @@
 #include <stddef.h>
 #include <poly1305.h>
 
+// WARNING: this code is stolen from https://github.com/floodyberry/poly1305-donna
+// I didn't have time to implement Poly1305 by myself for course work :(
+
 typedef unsigned __int128 uint128_t;
 
 #define MUL(out, x, y) out = ((uint128_t) (x) * (y))

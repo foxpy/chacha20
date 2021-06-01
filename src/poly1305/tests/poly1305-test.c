@@ -1,6 +1,9 @@
 #include <qc.h>
 #include <poly1305.h>
 
+// WARNING: this code is stolen from https://github.com/floodyberry/poly1305-donna
+// I didn't have time to implement Poly1305 by myself for course work :(
+
 int
 poly1305_power_on_self_test(void) {
     static const unsigned char nacl_key[32] = {

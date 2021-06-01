@@ -1,5 +1,8 @@
 #include "poly1305_impl.h"
 
+// WARNING: this code is stolen from https://github.com/floodyberry/poly1305-donna
+// I didn't have time to implement Poly1305 by myself for course work :(
+
 static unsigned long long U8TO64(const unsigned char* p) {
     return (((unsigned long long) (p[0] & 0xff)) | ((unsigned long long) (p[1] & 0xff) << 8) |
             ((unsigned long long) (p[2] & 0xff) << 16) | ((unsigned long long) (p[3] & 0xff) << 24) |
